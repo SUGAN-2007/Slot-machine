@@ -1,5 +1,22 @@
 const prompt = require("prompt-sync")()
 
+const rows = 3
+const col = 3
+
+const symbols = {
+    "A": 2,
+    "B": 4,
+    "C": 6,
+    "D": 8
+}
+
+const value = {
+    "A": 5,
+    "B": 4,
+    "C": 3,
+    "D": 2
+}
+
 const des = () => {
     while(true){
 
@@ -41,7 +58,28 @@ const bet = (bal , lines) => {
     }
     }
 }
-
+ const spin = () => {
+    const sym = []
+    for (const [symbol , count] of Object.entries(symbols)) {
+        for (let i = 0 ; i < count ; i++ ){
+            sym.push(symbol)
+        } 
+    }
+    const reel = [[],[],[]]
+    for (let i = 0 ; i < col ; i++){
+        const reelsym = [...sym]
+        for (let j = 0 ; j < rows ; j++ )
+        {
+            let randomin = Math. floor(Math.random() *  reelsym.length)
+            let selected = reelsym[randomin]
+            reel[i].push(selected)
+            reelsym.splice(randomin, 1)
+        }
+    }
+    return reel
+ }
+const reels = spin()
+console.log(reels)
 let bal = des()
 const lines = line()
 const bets = bet(bal,lines)
