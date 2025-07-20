@@ -65,8 +65,9 @@ const bet = (bal , lines) => {
             sym.push(symbol)
         } 
     }
-    const reel = [[],[],[]]
+    const reel = []
     for (let i = 0 ; i < col ; i++){
+        reel.push([])
         const reelsym = [...sym]
         for (let j = 0 ; j < rows ; j++ )
         {
@@ -78,8 +79,23 @@ const bet = (bal , lines) => {
     }
     return reel
  }
-const reels = spin()
-console.log(reels)
-let bal = des()
-const lines = line()
-const bets = bet(bal,lines)
+
+ const transpose = (reel) => {
+        transreel = []
+        for ( i = 0 ; i < rows ; i++) {
+            transreel.push([])
+            for (j=0 ; j < col ; j++)
+            {
+                transreel [ i ] .push(reel [j][i])
+            }
+        }
+        return transreel
+ }
+
+ let bal = des()
+ const lines = line()
+ const bets=bet(bal,lines)
+ const reels = spin()
+ const tran = transpose(reels)
+ console.log(reels)
+ console . log (tran)
