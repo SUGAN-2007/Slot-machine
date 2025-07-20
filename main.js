@@ -10,7 +10,7 @@ const symbols = {
     "D": 8
 }
 
-const value = {
+const sym_value = {
     "A": 5,
     "B": 4,
     "C": 3,
@@ -48,7 +48,7 @@ const line = () =>{
 const bet = (bal , lines) => {
     while(true){
 
-    const bet = prompt("enter the bet: ") 
+    const bet = prompt("enter the bet for per no of lines: ") 
     const bets = parseFloat(bet)
     if (isNaN(bets) || bets<=0 || bets  > (bal / lines)){
              console.log("invalid bets")
@@ -105,9 +105,31 @@ const bet = (bal , lines) => {
         }
  }
 
+ const getwin = (row,bet,line) => {
+        let winning = 0
+        for (let rows = 0 ; rows < line ; rows ++) {
+            const symbols = row[rows]
+            let alltrue = true
+            for (const symbol of symbols) {
+                if ( symbol != symbols[0])
+                {
+                    alltrue = false
+                    break
+                }
+            }
+            if (alltrue){
+                winning += bet * sym_value[symbol[0]]
+            }
+        }
+
+        return winning
+ }
+
  let bal = des()
  const lines = line()
  const bets=bet(bal,lines)
  const reels = spin()
  const tran = transpose(reels)
  printrow(tran)
+ const win = getwin(tran , bets , lines)
+ console.log ("You won : $",win)
