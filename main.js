@@ -92,10 +92,22 @@ const bet = (bal , lines) => {
         return transreel
  }
 
+ const printrow= (rows) => {
+        for (const row of rows){
+            let rowstr = ""
+            for ( const [ i , value] of row.entries()) {
+                rowstr += value
+                if ( i != row.length-1){
+                    rowstr += " | "
+                }
+            }
+            console.log(rowstr)
+        }
+ }
+
  let bal = des()
  const lines = line()
  const bets=bet(bal,lines)
  const reels = spin()
  const tran = transpose(reels)
- console.log(reels)
- console . log (tran)
+ printrow(tran)
